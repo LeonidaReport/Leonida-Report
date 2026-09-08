@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Details — GTA 6 Field Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12211f;
+    --paper: #f2ecda;
+    --paper-dim: #e7dfc6;
+    --folder: #0f2a2c;
+    --folder-deep: #0a1e20;
+    --coral: #ff6a45;
+    --rust: #b34a2a;
+    --gold: #c99a3c;
+    --steel: #4f7f83;
+    --line: rgba(18,33,31,0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--folder-deep);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(0,0,0,0.5);
+  }
+
+  /* ---------- HERO / REPORT HEADER ---------- */
+
+  header.report-head {
+    background: var(--folder);
+    color: var(--paper);
+    padding: 3.5rem 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 6px solid var(--coral);
+  }
+
+  header.report-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+    pointer-events: none;
+  }
+
+  .doc-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--steel);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  h1.file-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.02;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+  }
+
+  .file-title span { color: var(--coral); }
+
+  p.dek {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: #d8d2bd;
+    max-width: 56ch;
+    margin: 0 0 1.8rem;
+  }
+
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    color: var(--coral);
+    border: 2px solid var(--coral);
+    padding: 0.4rem 0.85rem;
+    transform: rotate(-2deg);
+    text-transform: uppercase;
+  }
+
+  .stamp::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--coral);
+    border-radius: 50%;
+    flex: none;
+  }
+
+  /* ---------- NAV / SECTION INDEX ---------- */
+
+  nav.index {
+    background: var(--paper-dim);
+    border-bottom: 1px solid var(--line);
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+  }
+
+  nav.index a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--folder);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  nav.index a:hover,
+  nav.index a:focus-visible {
+    border-bottom-color: var(--coral);
+  }
+
+  /* ---------- SECTIONS ---------- */
+
+  main { padding: 0 2.5rem 4rem; }
+
+  section.dossier {
+    padding-top: 3.2rem;
+    scroll-margin-top: 1.5rem;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--accent, var(--folder));
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tab-index {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--accent, var(--folder));
+    border: 1px solid var(--accent, var(--folder));
+    padding: 0.15rem 0.5rem;
+    flex: none;
+  }
+
+  h2.section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--folder);
+  }
+
+  p.section-note {
+    font-size: 0.95rem;
+    color: #5a5340;
+    margin: 0.6rem 0 1.4rem;
+    max-width: 60ch;
+    line-height: 1.5;
+  }
+
+  ul.entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+
+  ul.entries li {
+    position: relative;
+    padding: 0.85rem 0 0.85rem 1.3rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  ul.entries li:last-child { border-bottom: none; }
+
+  ul.entries li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15rem;
+    width: 7px;
+    height: 7px;
+    background: var(--accent, var(--folder));
+  }
+
+  ul.entries li strong {
+    color: var(--folder);
+    font-weight: 600;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    background: var(--folder);
+    color: #8fa5a3;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    padding: 1.6rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  footer a { color: var(--coral); text-decoration: none; }
+
+  /* ---------- BACK TO TOP ---------- */
+
+  .back-to-top {
+    position: fixed;
+    bottom: 1.6rem;
+    right: 1.6rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--folder);
+    border: 2px solid var(--coral);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+    z-index: 60;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+
+  .back-to-top { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover, .back-to-top:focus-visible { background: var(--coral); color: var(--folder); }
+  .back-to-top svg { width: 20px; height: 20px; }
+
+  @media (max-width: 620px) {
+    .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 42px; height: 42px; }
+  }
+
+
+  @media (max-width: 620px) {
+    header.report-head { padding: 2.4rem 1.4rem 2rem; }
+    nav.index, main, footer { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .doc-meta { font-size: 0.7rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="report-head">
+    <div class="doc-meta">
+      <span>FILE // LEONIDA-06</span>
+      <span>SOURCE: PREVIEW ACCESS</span>
+      <span>STATUS: UNCONFIRMED</span>
+    </div>
+    <h1 class="file-title">New details<br><span>on the record.</span></h1>
+    <p class="dek">A running log of GTA 6 preview findings — how the world reacts, what the police actually know about you, what the vehicles let you do, and what Jason and Lucia get up to when nobody's watching.</p>
+    <span class="stamp">Field notes — not final build</span>
+  </header>
+
+  <nav class="index" aria-label="Site navigation">
+    <a href="home.html">Home</a>
+    <a href="gta6-new-details.html" class="current">New Details</a>
+    <a href="story.html">The Story</a>
+    <a href="characters.html">Characters</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="legal.html">Legal</a>
+    <a href="https://map.stateofleonida.net/?lang=en" target="_blank" rel="noopener noreferrer">Map ↗</a>
+  </nav>
+
+  <nav class="index" aria-label="Section index">
+    <a href="#world">World &amp; Atmosphere</a>
+    <a href="#vehicles">Vehicles &amp; Traffic</a>
+    <a href="#fences">Fences, Mods &amp; Garages</a>
+    <a href="#npc">NPCs &amp; AI</a>
+    <a href="#relationship">Jason &amp; Lucia</a>
+    <a href="#robbery">Robberies &amp; Heists</a>
+    <a href="#economy">The Economy</a>
+    <a href="#police">Police &amp; Heat</a>
+    <a href="#combat">Combat &amp; Focus</a>
+    <a href="#movement">Controls &amp; Movement</a>
+    <a href="#activities">Side Activities</a>
+    <a href="#hud">HUD &amp; Menus</a>
+    <a href="#story">Story &amp; Characters</a>
+    <a href="#travel">Fast Travel &amp; Tech</a>
+    <a href="#systems">Body &amp; Systems</a>
+  </nav>
+
+  <main>
+
+    <section class="dossier" id="world" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">01</span>
+        <h2 class="section-title">World &amp; atmosphere</h2>
+      </div>
+      <p class="section-note">Free roam opens somewhere new, and the world keeps behaving with or without you in frame.</p>
+      <ul class="entries">
+        <li>Free roam started inside a <strong>previously unseen Jason and Lucia apartment</strong>.</li>
+        <li>Safehouses are highly interactive: bottles have opening animations, liquids have physics, doors open and close, and light switches actually work.</li>
+        <li><strong>Dynamic crimes can happen without player involvement.</strong> A traffic jam formed after masked criminals crashed, scattering stolen loot across the road — taking their loot naturally escalated into a police chase.</li>
+        <li>Large hotels can have <strong>fully seamless interiors</strong>. One hotel was entered through the lobby, taken by elevator to the top floor, and exited onto a rooftop helipad with no loading screen.</li>
+        <li>Beach population changes by time of day and can reach the packed density shown in Rockstar's own footage. Sand deforms under footsteps, and entering water visibly wets clothing and hair.</li>
+        <li>A bestiary-style collection lets encountered wildlife be registered, and animals can be individually studied the same way as in Red Dead Redemption 2.</li>
+        <li>Full-frontal nudity is present. One random event features a completely naked man asking for a ride home, leading to a side event, reward, and cinematic — even his private parts have physics.</li>
+        <li>Mount Kalaga, on the northern part of the map, has its own wildlife spread — squirrels, birds, rabbits or hares, hogs, bison, and deer were all seen in one pass.</li>
+        <li>In-game TV advertisements are back, including a fast-food parody spot poking fun at a real burger chain.</li>
+        <li>An early safehouse sits in Vice City's Bayside area, suggesting it belongs to the opening chapters. A later personal safehouse is in the Keys.</li>
+        <li>The map itself was only glimpsed briefly and mostly obscured by fog of war, but what was visible showed what looked like an airport or possibly a military base down in the Keys — and confirmed <strong>no panhandle</strong> on the map shape.</li>
+        <li>Multiple weather types are confirmed to exist, though Rockstar isn't detailing them publicly yet.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="vehicles" style="--accent: var(--coral);">
+      <div class="section-head">
+        <span class="tab-index">02</span>
+        <h2 class="section-title">Vehicles &amp; traffic</h2>
+      </div>
+      <p class="section-note">Getting a car — and using it as a weapon — both got a lot more physical.</p>
+      <ul class="entries">
+        <li>Electric scooters are rideable, and Jason can attack pedestrians while riding one.</li>
+        <li>Players can attack from vehicles by <strong>swinging the driver's door</strong> into pedestrians or other cars.</li>
+        <li>Vehicle break-ins can involve an analogue-stick lockpicking minigame, with different tools depending on the vehicle. Quietly forcing a lock can avoid triggering the alarm.</li>
+        <li>Hijacking a car that already has a driver triggers a quick-time event to physically pull them out; a passenger won't just sit there either, and will try to wrestle their way free instead.</li>
+        <li>Car trunks physically open, can contain loot, and can also store weapons. Bodies can be placed inside them — and players can apparently <strong>hide inside trunks themselves</strong>.</li>
+        <li>Gas stations repair and refuel vehicles through a short, roughly ten-second hold-to-fill sequence — deliberately brief, since fuel is meant to matter without becoming tedious. Electric vehicles can be recharged the same way. Vehicles found stolen off the street can already have partially depleted fuel or battery, another reason grabbing a random car in a rush is riskier than using one that's actually yours.</li>
+        <li>Traffic can become extremely dense and reacts dynamically to accidents, creating genuine jams. Major crashes can trigger cinematic slow motion. Roads are also narrower than GTA 5's, so squeezing through traffic takes more care — and turn indicators are now usable. Police car chases and their crashes are driven by live physics rather than scripted, so the exact way a pursuit ends is never pre-baked.</li>
+        <li>Driving has been rebuilt from scratch, aiming for a middle ground between GTA 4's weightiness and GTA 5's accessibility, with deeper tuning across drivetrain, tires, suspension, and steering. Top speeds run higher than GTA 5, cars handle noticeably differently from one another, and several high-end sports cars are tuned more for off-road capability than raw speed.</li>
+        <li>Vehicle parts deform and break away, and heavily damaged cars can become completely undriveable. Character bodies and hair react dynamically during collisions. Crash cams for major wrecks can be toggled off in settings.</li>
+        <li>Motorcycle crashes leave a visible aftereffect — one recorded spill saw the rider stagger back up noticeably dazed, walking abnormally for several seconds before recovering, rather than just popping back to their feet.</li>
+        <li><strong>Car theft is tiered.</strong> Older cars can be smashed into or picked with a slim jim (which avoids the alarm); newer vehicles also need a key cloner just to start, even after you're inside — and an immobilizer bypass tool is reportedly still part of that same progression. Without the right tool, a parked high-end car can't be stolen early on — the workaround is pulling the driver out of one that's actively being driven.</li>
+        <li>Vehicle destruction has been overhauled: engine block, gas tank, tires, and driver can all be targeted separately, and shooting tires is now genuinely effective at stopping a car.</li>
+        <li>Long guns are stored in a personal vehicle's trunk rather than carried everywhere — similar to how Red Dead Redemption 2 used the horse.</li>
+        <li>Car fences buy stolen vehicles, can hand out lists of specific cars to bring in, and — once unlocked — can strip trackers off a vehicle you want to keep.</li>
+        <li>Higher-tier vehicle trackers add their own mini-game: driving fast enough keeps a tracker quiet, but slowing down makes it start beeping, and staying slow too long pings the police with your exact location.</li>
+        <li>Tow trucks can be jacked and driven like any other vehicle, raising the possibility of tow-truck-related side content.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="fences" style="--accent: var(--gold);">
+      <div class="section-head">
+        <span class="tab-index">03</span>
+        <h2 class="section-title">Fences, mods &amp; garages</h2>
+      </div>
+      <p class="section-note">Owning, upgrading, and offloading vehicles all run through people and places that open up gradually, not all at once.</p>
+      <ul class="entries">
+        <li>A phone app scans a vehicle before it's even touched, showing its security tier, which tool is needed to get in quietly, its tracker tier (if any), what it would cost to register as personal property, and its resale value.</li>
+        <li>Car theft tools — slim jims, key cloners, and the rest — aren't available from the start. They unlock through progression with vehicle fences as favors are done for them out in the world.</li>
+        <li>Fence access itself scales gradually: early on, only lower-end cars can be sold and only basic trackers removed. Higher-tier fences, unlocked later, buy pricier vehicles and can strip more advanced trackers.</li>
+        <li>Customization runs through specialty mod shops rather than one do-everything garage. Two confirmed so far: <strong>One-Eyed Willie's</strong> for off-road work, and <strong>Ride Out Customs</strong> for lowriders and donk styling. Every shop covers basic work, but a shop's signature builds are exclusive to that location — closer to how a hair salon has standard cuts plus its own specialty styles.</li>
+        <li>Pay'n'Sprays are back for the first time since the PS2 era, and deliberately simple — repairing a car and respraying it into one of roughly six to eight basic colors, mainly to shed a vehicle's heat indicator. Cars can also be sold there.</li>
+        <li>Car fences and Pay'n'Sprays aren't available from the very start of the game — both unlock over time as the story progresses.</li>
+        <li>Safehouses can't be bought outright, which tracks with Jason and Lucia being on the run — owning multiple known addresses wouldn't make sense for two fugitives. <strong>Garages</strong> fill that role instead: purchasable storage space where a personal vehicle count is limited by how much garage space has been bought.</li>
+        <li>A stolen car can be stashed safely in a garage — kept secure even before it's legally registered — until the means to register or resell it has been unlocked.</li>
+        <li>A destroyed or abandoned vehicle can be recovered through <strong>Scooter Bros</strong> for a modest fee. If police know it was your vehicle, they'll stick around it — leaving a window to sneak back and steal it out from under them, or risk it being impounded, which costs more to retrieve or requires stealing it back from the impound lot outright.</li>
+        <li>Calling in a personal vehicle is physically simulated rather than just spawning nearby — an NPC actually drives it to your location, then leaves the scene on an electric scooter (which is presumably where the "Scooter Bros" name comes from).</li>
+        <li>One preview build had three personal vehicle slots available — one for Jason, one for Lucia, and a third shared slot — with the number possibly subject to change by launch. Only registered vehicles can be called in for delivery or used for persistent weapon storage.</li>
+        <li>Duffel bag storage scales with vehicle size: motorcycles can't store any beyond what's being personally carried, cars hold a couple, and vans or trucks can carry several more — making the choice of getaway vehicle a real planning decision for a robbery.</li>
+        <li>A separate car-collecting activity revolves around a character named Wyman, tied to the Ultimate Edition: individual car parts scattered around the map can be gathered and brought back to him, who eventually assembles them into a finished, keepable, drivable car.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="npc" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">04</span>
+        <h2 class="section-title">NPCs &amp; AI behavior</h2>
+      </div>
+      <p class="section-note">The population reacts specifically to what you do, not just that you did something.</p>
+      <ul class="entries">
+        <li>You can't pet every dog automatically — players can ask owners for permission, and dogs and owners can react differently or become hostile. Carrying dog treats lets you feed dogs you come across, and studying one can reveal its breed.</li>
+        <li>Dog leashes have physics and react to the player's body instead of clipping through it.</li>
+        <li><strong>Witnesses can recognize details</strong> like your clothing and vehicle before calling police.</li>
+        <li>Phones, glasses, and hats can physically fly off NPCs when hit — and can reportedly be picked up afterward, similar to Red Dead Redemption 2. Items knocked loose this way can also be worn by the player, which could plausibly help disguise an appearance right after a crime.</li>
+        <li>Gore is significantly more graphic — one NPC was completely decapitated by a shotgun blast, and a sticky bomb detonated in an elevator left visible body parts behind.</li>
+        <li>Crime happens without you: unrelated NPCs were seen robbing a van mid-drive, something only the player could trigger in GTA 5.</li>
+        <li>Random world events range from a pedestrian falling off a bridge to a livestreamer parody who reacts to the world around them in real time, with bystanders visibly reacting too — reportedly hundreds or thousands of these smaller moments exist across the map.</li>
+        <li>Traffic AI is improved overall, but bad drivers still exist — cutting lanes and blocking paths like real traffic would.</li>
+        <li>NPC crowd density is significantly higher than GTA 5, and the team specifically built a much wider range of NPC heights — a technical challenge, but one that makes crowds read as far less uniform and repetitive.</li>
+        <li>NPC clothing appears to match the area — people dressed in gym and sports wear were seen clustered right outside a gym, for instance, while a residential neighborhood had NPCs dressed more like typical locals.</li>
+        <li>Armed encounters aren't one-size-fits-all: some NPCs may try to physically wrestle a weapon out of your hands, while others simply flee or react fearfully — the exact response can vary NPC to NPC.</li>
+        <li>NPCs are reportedly reactive during live playtesting itself: while the dev team observed a session, an antagonized NPC escalated further than intended by shoving Jason around — with Lucia stepping in to knock her out unprompted. The team noted it as a case of an NPC reacting too aggressively, to be tuned later.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="relationship" style="--accent: var(--rust);">
+      <div class="section-head">
+        <span class="tab-index">05</span>
+        <h2 class="section-title">Jason &amp; Lucia</h2>
+      </div>
+      <p class="section-note">Playing as a duo has consequences even outside missions.</p>
+      <ul class="entries">
+        <li>Jason and Lucia react when one is abandoned during free roam. After Lucia flew away without Jason, he texted: <em>"Forgetting something? 😂"</em></li>
+        <li>Leaving either character behind can hurt their relationship and affect how well they work together during robberies.</li>
+        <li>Jason can visit a strip club alone without automatically causing relationship drama — Lucia can also go with him.</li>
+        <li>The relationship system is entirely optional — time spent together, dates, and gestures like holding hands build chemistry, but players who ignore it simply won't see the pair pursue romance. The two can just as easily stay partners in crime instead of lovers, without the game forcing either outcome.</li>
+        <li>Jason and Lucia can actually break up as a couple while still remaining criminal partners — their shared story keeps going either way. This is a stronger confirmation than simply saying romance is optional: the relationship can be actively nurtured, allowed to drift into a strictly professional one, or ended outright, all without derailing the campaign.</li>
+        <li>The relationship system reportedly extends to genuine narrative decisions — such as choosing whether to tell the other character something or keep it hidden, each option carrying its own risk of causing problems, sooner or later. The design has been compared internally to situations real couples deal with.</li>
+        <li>Dates are fully dynamic rather than scripted — there's no fixed date structure like GTA 4 or San Andreas. Getting dressed up for a proper night out, grabbing food, or just casually kayaking, diving, or walking the beach together can all count, depending on how the moment is spent.</li>
+        <li>Neither character can be written out of the campaign by neglecting the relationship, and playing as only one of them for a stretch doesn't break the pair up — they remain working partners regardless of how romantically close the relationship gets.</li>
+        <li>The relationship deliberately avoids a nagging-partner mechanic — letting time together lapse doesn't trigger guilt trips or scripted complaints from either character.</li>
+        <li>Each character has an <strong>independent Criminal Profile</strong>, shown as its own icon with a heart symbol tracking relationship status. It's genuinely possible to run Lucia as a professional and Jason as a psycho in the same save.</li>
+        <li>Switching characters while together is instant (R1/RB); switching while apart uses a slower zoom-out transition across the map.</li>
+        <li>Whichever character isn't being controlled keeps living their own routine off-screen rather than idling in place — how deep those independent routines go (sleep, workouts, and so on) hasn't been confirmed.</li>
+        <li>When the AI-controlled partner is driving, they can outperform the player — leading to unscripted, cinematic moments during chases (a train blocking pursuing cops mid-escape, for example). The partner can also be given simple contextual commands without switching control — telling AI-controlled Lucia to speed up during a chase made her accelerate and weave more aggressively through traffic.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="robbery" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">06</span>
+        <h2 class="section-title">Robberies &amp; heists</h2>
+      </div>
+      <p class="section-note">Money is no longer something that only happens on a mission — and what's earned off-mission is finally woven back into the story.</p>
+      <ul class="entries">
+        <li>The 3D map can help plan robberies by showing estimated loot value and building information.</li>
+        <li>Robbery approaches can change dynamically if entrances are locked.</li>
+        <li>The AI-controlled second protagonist can actively assist during robberies. While controlling Jason, Lucia independently held employees and customers at gunpoint while he searched the back.</li>
+        <li>Safes can have multiple solutions: a written code found by searching the room, a tip overheard from a passing NPC, or a code sent directly by a fence over text.</li>
+        <li>Threatening a cashier can cause them to panic and reveal something extra — like a safe in the back room — turning a simple robbery into a choice between taking the smaller guaranteed cash and leaving immediately, or pushing further for a bigger payout at the cost of more time exposed to a possible police response.</li>
+        <li>Loot is physically represented, including individual gold bars, diamonds, cash, and valuables — Jason picks it up piece by piece and places it into his bag. Cash registers physically open, and money is taken directly from inside.</li>
+        <li>Money comes in three forms: a bank balance (managed through the BuckMe app, and fully safe), cash on hand (lost if the player dies or gets arrested, so it needs to reach an ATM), and duffel bag loot, which is worthless until it's sold to a fence.</li>
+        <li>Free-roam money-making spans roughly five tiers: low-paying local stores and convenience stores that don't appear on the map, then jewelry stores, banks, and criminal or gang-run compounds (with at least one compound reserved for the Ultimate Edition) that can appear as map opportunities with an estimated payout, plus standalone vans as smaller mini-heist targets, and full story-driven heists — like the large vault briefly glimpsed in early marketing — sitting above all of it.</li>
+        <li>Higher-tier robberies aren't guaranteed to show up on the map. They can surface through a tip from someone met during the story, a favor traded with an NPC, incidental world events, or simply noticing an opportunity while exploring — not unlike how Red Dead Redemption 2 surfaced its own random encounters. Any store that can be walked into can reportedly be robbed, whether or not it's marked.</li>
+        <li>Every store plays differently — some have back doors to sneak out through, some have security cameras to manage, and civilian bystanders or store staff can occasionally try to play hero and intervene.</li>
+        <li>The emergent event system can produce genuinely unique scenarios: one preview session saw two masked women trapped inside a jewelry store after their own robbery went wrong and the door locked mid-alarm, begging Jason and Lucia for help. The player could ignore them, help them escape, or — as happened in this case — help them out and then rob the same store personally afterward. The development team said they hadn't seen that exact situation come up in months of their own testing.</li>
+        <li>Fences specialize by loot type — drugs, jewelry, cars, and other categories not yet detailed — and unlock progressively through the story, meaning a high-value target may be off-limits early simply because there's nowhere yet to offload what it drops.</li>
+        <li>Story progression can be deliberately gated behind money: certain points won't advance until a cash goal is met, giving the plot room to breathe and open up new contacts — a different approach from GTA 5, where free-roam earnings never actually touched the story.</li>
+        <li>One robbery location — Hank's Waffles Diner — is a direct callback to a location that surfaced in the 2022 GTA 6 leaks.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="economy" style="--accent: var(--gold);">
+      <div class="section-head">
+        <span class="tab-index">07</span>
+        <h2 class="section-title">The economy</h2>
+      </div>
+      <p class="section-note">Where all that stolen money is actually meant to go.</p>
+      <ul class="entries">
+        <li>Confirmed spending categories include clothing, makeup, hairstyles, headphones and earbuds, and car customization, alongside garages for personal vehicle storage.</li>
+        <li>Street-stolen cars can be registered as personal vehicles for a fee, though high-end vehicles can't be registered this way early on — that ability unlocks later.</li>
+        <li>Safehouses, standalone businesses, and larger properties don't appear to be purchasable, in keeping with Jason and Lucia being fugitives on the run rather than settled property owners.</li>
+        <li>Marked or otherwise dirty cash from certain scores can't just be spent or banked directly — it reportedly has to be run through a dedicated money-laundering business first, functioning as a cash equivalent to how fences handle physical loot.</li>
+        <li>Development has directly acknowledged the late-game problem from GTA 5 — finishing the story with tens of millions of dollars and nothing meaningful left to spend it on — as something the team specifically wants to avoid this time, without yet detailing exactly what the bigger purchases turn out to be.</li>
+        <li>One account mentioned attacking rival gang territory as a possible extra way to make money, similar to San Andreas — but this hasn't been independently corroborated, may be a mistranslation, and could plausibly be describing the already-confirmed gang compounds rather than a distinct system. Worth treating cautiously until confirmed elsewhere.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="police" style="--accent: var(--rust);">
+      <div class="section-head">
+        <span class="tab-index">08</span>
+        <h2 class="section-title">Police &amp; heat</h2>
+      </div>
+      <p class="section-note">The wanted system no longer resets after thirty seconds behind a wall. Police now keep a memory of exactly what they know about you — and that memory has to be dealt with piece by piece.</p>
+      <ul class="entries">
+        <li>A new layer called <strong>Heat</strong> sits underneath the traditional wanted stars, built specifically to stop players from losing the police instantly and having them forget everything a moment later. The intent was to give the police persistent memory rather than the short-term amnesia of earlier games.</li>
+        <li>Heat indicators appear directly below the stars and show exactly what the police know: CCTV footage, that a couple is involved, outfits, physical appearance, weapons, and — if the vehicle has been identified — a separate vehicle indicator.</li>
+        <li>Each indicator can be cleared on its own: destroying CCTV footage, splitting a couple up, changing into a stored outfit, masking up before a crime, or dropping the weapon that was seen. Leaving any of them unresolved makes it easier for police to instantly recognize the pair again, even once the stars themselves have cleared.</li>
+        <li>Police only respond once a crime has actually been witnessed and reported — by phone, by an alarm going off mid-robbery, or by a vehicle's built-in tracker self-reporting a theft.</li>
+        <li>Wanted stars carry distinct states. <strong>Solid white</strong> means police have a direct line of sight and the priority is breaking away. <strong>Flashing white</strong> means that break has begun and the pursuit is being lost. <strong>Red</strong> means the police no longer know an exact location but still know who they're looking for, and are actively patrolling the area. <strong>Hollow</strong> stars mean an alarm was triggered with no identifying description at all attached — enough to walk, or even drive, straight past an officer without incident.</li>
+        <li>The minimap reflects a red search zone with a second, lighter ring around it once a chase is broken off. The darker inner zone is where police actively search using exactly what they currently know about you; simply stepping outside it doesn't end the search — the wider, lighter zone keeps going until the pursuit is properly lost. Once fully lost, the resulting heat zone often isn't circular at all — more a neighborhood-shaped area — and depending on the location and star count, it can end up covering more ground than the original search radius did.</li>
+        <li>A tracked vehicle's indicator can be cleared by torching the car, taking it to a returning Pay'n'Spray for a quick respray, or simply switching to a different vehicle.</li>
+        <li>The size of the heat zone scales with the severity of the wanted level — a small store robbery leaves only a neighborhood-sized perimeter, with police setting up watch around the store itself in case of a return visit. At six stars, the search stops being a radius entirely and goes map-wide instead, described as relentless — development deliberately declined to detail everything that happens at six stars, preferring to let players find out for themselves.</li>
+        <li>A recorded playthrough of a failed store robbery illustrates the loop in practice: a clerk knocked out rather than killed, the CCTV footage destroyed, a safe located but its code unknown — only for the crime to have already been phoned in. Facing a police perimeter forming outside, the smarter play was to strip the mask, leave empty-handed, and cut losses rather than risk a shootout for a safe that couldn't be cracked in time.</li>
+        <li>Carrying a visible weapon changes how the world treats you well before a shot is fired. A holstered or back-slung long gun draws no particular attention, but one held out in the open makes nearby civilians quietly distance themselves, then move away faster once they're out of the line of sight. Police issue a warning at that stage; raising the weapon with both hands as if ready to fire escalates things further, and aiming it directly at people makes them flee outright — or, in some cases, draw a concealed weapon of their own.</li>
+        <li>During an active shootout, nearby civilians who can't safely run don't just scatter blindly — some crouch and take cover behind cars, walls, or benches instead, waiting out the danger rather than sprinting through the crossfire.</li>
+        <li>Every police vehicle carries a shotgun or assault rifle in the trunk, often alongside spare body armor, making a firefight with police a viable early source of better weapons.</li>
+        <li>Individual officers appear to have their own physical performance rather than sharing one identical stat block — one heavier officer chasing on foot was eventually left behind, winded and out of breath, while a lighter officer might keep pace far longer.</li>
+        <li>Being tased and knocked down, or otherwise taking a hard physical fall, can leave visible, localized injuries — abrasions on knees and elbows rather than a single generic "damaged" appearance applied everywhere.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="combat" style="--accent: var(--rust);">
+      <div class="section-head">
+        <span class="tab-index">09</span>
+        <h2 class="section-title">Combat &amp; focus</h2>
+      </div>
+      <p class="section-note">Auto-aim is gone, but a slow-motion targeting system picks up the slack — and gives you more choice in how a fight ends.</p>
+      <ul class="entries">
+        <li><strong>Auto-aim / lock-on is removed.</strong> Some standard aim assist and weapon bloom remain, and the amount of aim stickiness is tunable in options — leaning further toward a free-aim feel by default than any past GTA.</li>
+        <li><strong>Focus</strong> slows time and highlights enemy (and vehicle) weak points — red for a lethal shot, yellow for non-lethal. It works similarly to Dead Eye or Michael's ability in GTA 5, though it doesn't auto-target for you the way Dead Eye does. Enemies, like police, don't appear on the minimap outside of Focus, pushing combat toward reading the environment rather than watching a radar. Focus does more than target enemies, too — it can highlight nearby police in blue, mark interactive objects like explosives, and pick out doors that can be entered, functioning partly as an environmental scanning tool similar to Red Dead Redemption 2's Eagle Eye.</li>
+        <li>Hit markers come in three colors: white for a hit, yellow for an incapacitated enemy who's no longer a threat but still alive, and red for a kill — and the same color logic extends to melee, where knocking someone out flashes the edges of the screen yellow.</li>
+        <li>The weapon wheel splits into Weapons and Items tabs. Loadouts allow two one-handed weapons or two two-handed weapons; anything beyond that has to be stored in a personal vehicle's trunk. There are also dedicated melee, gadget, and throwable slots. Carrying two long guns means one always has to stay drawn in-hand rather than stowed — which draws constant NPC attention, so most players will likely favor carrying just one most of the time.</li>
+        <li>Two separate healing items appear on the HUD — one restores health directly, the other (marked with a gold heart, and possibly an adrenaline shot) can be used mid-chase to quickly refill stamina when you're exhausted and still being pursued.</li>
+        <li>Pistols are no longer fire-rate locked — you can now fire as fast as you can pull the trigger, instead of GTA 5's capped rate. Weapons overall carry noticeably more recoil and kick than before, to the point that holding the trigger down on an assault rifle loses accuracy fast — tap-firing is far more effective this time, even on rifles.</li>
+        <li>Quick weapon swapping is confirmed in combat (e.g. switching from an empty assault rifle straight to a pistol), and weapons can be physically handed off between Jason and Lucia by walking up and passing one over.</li>
+        <li>Hand-to-hand combat adds a hold-to-block option along with a timed parry, a clear step up from GTA 5's melee, though it's not yet clear how deep the system runs compared to Red Dead Redemption 2's. Jason and Lucia also fight differently in melee — Jason favors raw strength and heavy punches like a street brawler, while Lucia leans on kickboxing and mixed martial arts, reading as noticeably more technical and agile.</li>
+        <li>Weapon customization looks considerably expanded — engravings, alternate paint jobs, and gold-plated finishes have all been shown, with individual weapon parts apparently modifiable in detail. A weapon built and customized this way becomes permanently owned: even if it's confiscated on arrest, it stays safe in personal vehicle storage rather than being lost for good, unlike weapons simply picked up loose from the world.</li>
+        <li>Shoulder switching is back — a Red Dead Redemption 2 feature that wasn't in GTA 5.</li>
+        <li>Kill cams (Red Dead 2 / Max Payne style) can be toggled on or off in settings, same as crash cams.</li>
+        <li>Crouching is confirmed as its own state, separate from cover — GTA 5 only had cover, not crouch. Prone does not appear to be returning.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="movement" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">10</span>
+        <h2 class="section-title">Controls &amp; movement</h2>
+      </div>
+      <p class="section-note">A handful of long-standing GTA control conventions are being deliberately broken.</p>
+      <ul class="entries">
+        <li>Sprinting has moved from repeatedly tapping a face button to a single click of the left stick (L3) — a significant control change, since it frees the right stick up for aiming and looking around while running instead of locking a thumb onto the face buttons.</li>
+        <li>Movement speed is customizable beyond a binary walk/sprint — normal walk and fast jog speeds can be set individually and saved as a default in the settings menu, directly responding to complaints about forced slow-walking in cutscene-adjacent moments.</li>
+        <li>Diving into water lets the player choose the type of jump performed — speed, whether to flip, and which direction to flip in — similar in spirit to the swimming-dive controls in the PlayStation Spider-Man games, which recontextualizes some of the more elaborate dive animations shown in marketing.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="activities" style="--accent: var(--gold);">
+      <div class="section-head">
+        <span class="tab-index">11</span>
+        <h2 class="section-title">Side activities</h2>
+      </div>
+      <p class="section-note">Almost all of it is optional, but there's a lot to opt into.</p>
+      <ul class="entries">
+        <li>Gyms appear in multiple forms — open-air beach setups, full commercial gyms, and a home gym at Jason's early Keys safehouse. A membership has to be bought at the front desk before a new gym can be used, and change rooms offer the option to switch into gym clothes for the workout.</li>
+        <li>Vending machines near the change rooms sell drinks like protein shakes or energy drinks that temporarily boost stamina for the workout ahead — useful since a strength exercise (worked with L2/R2, pulled down and released, with movements like deadlifts wanting a fast drop) drains stamina as it's performed, adding a small risk of running out mid-set. The same supplements can also speed up recovery afterward, letting a character train again sooner instead of waiting to recover naturally. Confirmed equipment includes treadmills, punching bags, squat racks, lat pulldowns, bench presses, and deadlift stations.</li>
+        <li>Three completed strength exercises in one in-game day count as a full workout and grant a permanent stat increase; strength training raises health, while cardio work like the treadmill raises stamina. Muscle isn't permanent, either — maintaining it takes roughly three gym sessions a week, with visible appearance changing alongside the underlying stats. Exactly how that maps to real time depends on how long an in-game day actually runs, which is confirmed to be longer than GTA 5's 48 minutes but not by how much.</li>
+        <li>Eating, sleeping, and training form one connected system rather than separate meters — building muscle once isn't enough, and letting any of the three lapse for too long has consequences. That said, the whole loop is designed to feel noticeably faster and less demanding to maintain than Red Dead Redemption 2's equivalent systems.</li>
+        <li>A dedicated fitness app tracks gym progress and also monitors sleep — showing whether a character is well-rested, which affects how quickly certain stats regenerate. Going too long without sleep is said to bring visible under-eye bags along with slower regeneration, similar to how Arthur Morgan had to be looked after in Red Dead Redemption 2.</li>
+        <li>Fishing is as in-depth as Red Dead Redemption 2 but strictly catch-and-release, existing mainly for fun, minor narrative beats, collectibles, and challenges. Hunting exists specifically as a money-making activity instead, introduced through a character connected to Jason who hadn't been identified as of this reporting.</li>
+        <li>Wrestling and kickboxing both appear as confirmed physical activities — Jason has been shown getting body-slammed in a WWE-style backyard wrestling match, while Lucia has separately been shown kickboxing, suggesting the two characters may have distinct fighting styles rather than sharing one moveset.</li>
+        <li>Basketball plays as an aim-and-hold-to-shoot minigame, not full sim-depth like a dedicated basketball game, with at least two known courts so far; making shots may tie into raising the Focus stat, though that link isn't fully confirmed.</li>
+        <li>Pool is confirmed via a table at the Delights strip club in Port Gellhorn, with tables likely scattered across other bars and clubs on the map, typically played against an NPC opponent.</li>
+        <li>Mini golf is confirmed, tied to a scene involving a character named Cal Hampton; a full golf course has been suggested by unofficial map data-mining on one of the islands or keys, but hasn't been directly shown in any gameplay footage yet.</li>
+        <li>Tennis courts have been spotted on the map, though tennis itself hasn't been shown being played in any preview footage so far.</li>
+        <li>Base jumping and parachuting return with a minimal on-screen HUD; it's unconfirmed whether dedicated parachuting missions exist the way they did in GTA 5, though Vice City's skyline makes it a reasonable bet.</li>
+        <li>Underwater diving includes an oxygen tank meter (GTA 5's scuba suit had unlimited air) and wildlife like stingrays to find; general swimming uses a separate lung-capacity meter that visibly replaces the stamina bar once underwater.</li>
+        <li>Backyard wrestling is a confirmed side activity, alongside jet skiing, kayaking, and diving in the Keys — several of these can double as dates with Lucia.</li>
+        <li>Racing supports up to 16 competitors, with point-to-point races, lap races on proper tracks, and underground street races that include nitrous. Off-road races out in Mount Kalaga mix bikes and cars in the same event. Race checkpoints are pink, distinct from the yellow-and-blue checkpoints of GTA 5.</li>
+        <li>A shooting range is present, possibly tied to improving the Focus stat, though its exact function wasn't confirmed.</li>
+        <li>Strip clubs include the Jack of Hearts (run by Boobie Ike) and Delights in Port Gellhorn; Club 9/11 in Vice City is a separate, densely populated nightclub.</li>
+        <li>A zoo is on the map, and it doubles as a place to study animals for the wildlife collection — visiting together can also count as a date with Jason and Lucia.</li>
+        <li>In-game television includes fully produced shows made with outside animators hired specifically for the purpose, alongside the returning in-game ads.</li>
+        <li>Drive-thrus are functional — ordering food there gives the same kind of temporary stat boost as other consumables. Sit-down restaurants like Hank's Waffles appear enterable too, though ordering food inside one wasn't directly confirmed.</li>
+        <li>Convenience stores let you pick items off the shelves and buy them, similar to Red Dead Redemption 2 — a full grocery store or mall wasn't seen, so it's unconfirmed whether either exists. Some shops also stock newspapers or magazines that can be physically picked up and flipped through page by page, purely as an optional, collectible-style distraction rather than anything mandatory.</li>
+        <li>Hair can be cut shorter or shaved at a safehouse mirror, but it won't grow back on its own — getting a different style or length back requires visiting a barber or salon, rather than Red Dead 2's gradual regrowth system.</li>
+        <li>Body transformation looks closer to San Andreas' visible physical changes than an invisible stat tracker — separate preview sessions have shown a noticeably more muscular Jason and a fuller-figured Lucia compared to their trailer models, both attributed to diet and exercise choices during play.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="hud" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">12</span>
+        <h2 class="section-title">HUD &amp; menus</h2>
+      </div>
+      <p class="section-note">A lot of the classic GTA HUD is now optional rather than fixed.</p>
+      <ul class="entries">
+        <li>The default HUD is kept deliberately clean — tapping D-pad down temporarily brings up cash, health/stamina bars, and the minimap, which then fades away again. A "classic mode" keeps the minimap on screen permanently instead, the same toggle covering the Red Dead-style compass option.</li>
+        <li>A quick waypoint feature lets you hold D-pad down and click R3 on a point of interest in your line of sight to set a waypoint on the fly, without opening the map.</li>
+        <li>The full map has moved onto the PS5 controller's touchpad, alongside the traditional options-button menu route.</li>
+        <li>Mission waypoints are pink/magenta; custom player-set waypoints are cyan/teal.</li>
+        <li>The items tab (separate from weapons) covers masks, headwear, and glasses; a coat-hanger icon lets you change outfits from inside a personal vehicle.</li>
+        <li>Two currencies are tracked on the HUD — bank balance and cash on hand — shown as separate icons.</li>
+        <li>A character-switch menu (hold R1/RB) shows both characters' portraits, their individual Criminal Profile state, and a heart icon for relationship status.</li>
+        <li>The phone is now a physical, in-game item rather than a screen overlay — you actually see your character holding and looking at it. Confirmed apps: <strong>RideMe</strong> (rideshare/taxi), <strong>WhatUp</strong> (texting), <strong>BuckMe</strong> (banking/cash), <strong>Snapmatic</strong> (social media, with people you follow), a <strong>fitness app</strong>, and <strong>Waink</strong> (vehicle scanner — required break-in tool, resale value, registration cost). Some Snapmatic posts can reportedly lead you to real locations and events happening in the world.</li>
+        <li>Content-creator tools confirmed: a streamer mode with a copyright-free music filter, and a photo mode that spins the camera freely around your character — similar to Red Dead 2's, though not a full Rockstar Editor. A Red Dead 2-style cinematic camera mode also returns, this time built around driving instead of horseback riding.</li>
+        <li>First-person mode was not seen or confirmed by any preview attendee, mirroring GTA 5, which also launched without it.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="story" style="--accent: var(--coral);">
+      <div class="section-head">
+        <span class="tab-index">13</span>
+        <h2 class="section-title">Story, missions &amp; characters</h2>
+      </div>
+      <p class="section-note">Names, faces, and the systems built around how missions actually play out.</p>
+      <ul class="entries">
+        <li>Traditional cutscenes are increasingly replaced with in-game, camera-controlled transitions — a technique carried over and expanded from Red Dead Redemption 2, intended to keep the player feeling connected to the scene rather than cutting away from them.</li>
+        <li>Rob Nelson's own playthrough (as told to the New York Times) took roughly <strong>80 hours</strong> for the main story plus some optional side content with narrative ramifications — which, if that holds for the full campaign, would make it Rockstar's longest game yet.</li>
+        <li>The story is structured into chapters, and after its opening missions it reportedly stops restricting where the player can go — chapter progression naturally moves through different parts of Vice City and Leonida rather than gating the map off piece by piece for most of the game.</li>
+        <li>Beyond Criminal Profile, some story moments present genuine decision points with two or more real options, and those choices can resurface and affect how later events play out — a step further than an invisible reputation number ticking up or down in the background.</li>
+        <li>The Red Dead 2 NPC interaction system returns: holding L2/LT lets you talk to, greet, or antagonize almost any NPC in the open world — including specifically-flagged NPC types like tourists.</li>
+        <li><strong>Criminal Profile</strong> is not a morality meter — Rockstar was explicit that it isn't about playing "good." Four named states have been confirmed, from best to worst: <strong>Professional</strong>, <strong>Aggressive</strong>, <strong>Violent</strong>, and <strong>Psycho</strong> — tracking the type of criminal being played rather than judging right or wrong. Below all four sits a separate, much harder to reach <strong>shattered</strong> state that locks in permanently for that playthrough once triggered.</li>
+        <li>The shattered state exists partly as a response to Red Dead Redemption 2's honor system, where a character could commit mass violence and then fully redeem their standing just by petting a few dogs before a key story chapter — Criminal Profile is designed to resist that kind of quick reversal.</li>
+        <li>Staying <strong>Professional</strong> comes down to restraint and control during a robbery — not killing or injuring people unless it's unavoidable — rather than following any single correct method; expected combat during a scripted confrontation doesn't appear to tank the profile the same way unnecessary violence elsewhere would. Even how a crime is committed seems to matter as much as whether it's committed at all — quietly picking a car lock versus smashing the window to steal the same car can reportedly be weighed differently.</li>
+        <li>Criminal Profile notifications can be turned off entirely in settings for players who don't want to engage with the system at all, letting chaos be caused freely without any tracked consequence. Development also describes the system as still being actively balanced ahead of launch, and reaching either extreme doesn't unlock any special gameplay powers — it's meant purely to describe the kind of criminal being played, not to reward or punish a particular style.</li>
+        <li>On what the design team is proudest of, the philosophy behind interlocking systems like these was summed up simply: they're built to let a player roleplay as heavily or as lightly as they want, causing as much carnage as they can imagine either way — it's ultimately up to the player how much any of it is allowed to matter.</li>
+        <li>Boobie Ike, owner of the Jack of Hearts strip club, is an early-to-mid game mission giver.</li>
+        <li>An early mission involves finding a contact named Raymond, who turns out to be set up by an associate named Onesto, leading into a shootout and an escape from a corrupt cop named Mendez.</li>
+        <li>Brian and his wife Lori introduce Jason and Lucia to Raul Bautista, a more experienced criminal who mentors them early on — including warning that knowing when to walk away, rather than getting greedy, may be the difference between getting out and dying.</li>
+        <li>A later mission has Jason and Lucia bodyguarding a character named Andre Dan Leon, which introduces Valentina — a character previously seen in GTA Online's Moneyfronts DLC alongside a character called Mr. Faber, fueling fan theories about a connection between GTA 6 and GTA Online.</li>
+        <li>Large interiors extend to airports, with Vice City's main airport shown as a full walkable interior.</li>
+        <li>A closing line from a character named Cal Hampton — telling Jason and Lucia to enjoy the present because "these are your glory days" — plays over the trailer's final montage and is read by many as a double meaning aimed at the fanbase itself.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="travel" style="--accent: var(--gold);">
+      <div class="section-head">
+        <span class="tab-index">14</span>
+        <h2 class="section-title">Fast travel &amp; tech notes</h2>
+      </div>
+      <p class="section-note">A few practical details about getting around and the build the preview ran on.</p>
+      <ul class="entries">
+        <li>The build shown ran at <strong>4K/30fps on a base PS5</strong> (not a Pro), roughly two months before this reporting. Whether the final game targets 60fps at launch hasn't been confirmed either way — that's Rockstar's call to announce.</li>
+        <li>Bus stops now show up directly on the minimap, complete with NPCs already waiting there — you can skip straight to riding instead of chasing a bus down on foot.</li>
+        <li>Trains can be ridden, though it's unconfirmed whether they work as a fast-travel option the same way buses do.</li>
+        <li>Taxis are available, and the phone's RideMe app works the same way — summon a ride and either skip straight to the destination or stay and ride along with the driver.</li>
+      </ul>
+    </section>
+
+    <section class="dossier" id="systems" style="--accent: var(--coral);">
+      <div class="section-head">
+        <span class="tab-index">15</span>
+        <h2 class="section-title">Body &amp; systems</h2>
+      </div>
+      <p class="section-note">Player-facing tools and a few things still marked as unfinished.</p>
+      <ul class="entries">
+        <li>Jason and Lucia can physically gain or lose weight and muscle depending on food, exercise, and other activities. Body fat and sleep quality exist as their own tracked stats, separate from health, stamina, and focus, and tracked individually per character — sleep quality is confirmed to affect regeneration speed, though the exact gameplay impact of body fat specifically hasn't been detailed.</li>
+        <li>Dying and getting arrested lead to different outcomes: dying respawns the player at a hospital, while getting arrested respawns them outside a jail or prison instead. Either way, some money is lost. Weapons picked up loose from the world can be confiscated on arrest, but a character's own owned and customized weapons stay safe and can still be recovered from their personal vehicle afterward.</li>
+        <li>Interaction prompts and RP-heavy UI elements can be disabled.</li>
+        <li>First-person mode had <strong>not been "implemented"</strong> at the time of the preview — it could potentially arrive later.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Unofficial fan site. Not affiliated with or endorsed by Rockstar Games or Take-Two Interactive Software, Inc. Info sourced from public content by TGG, El Rubius, Davy Jones, Mike ShowSha &amp; others — see <a href="legal.html">Legal</a>.</span>
+    <span>Created by <a href="https://x.com/SamzyHimself" target="_blank" rel="noopener noreferrer">SamzyHimself</a></span>
+  </footer>
+
+</div>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"></path>
+    <path d="M6 11l6-6 6 6"></path>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

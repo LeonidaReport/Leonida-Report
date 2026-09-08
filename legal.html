@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal &amp; Disclaimers — GTA 6 Field Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12211f;
+    --paper: #f2ecda;
+    --paper-dim: #e7dfc6;
+    --folder: #0f2a2c;
+    --folder-deep: #0a1e20;
+    --coral: #ff6a45;
+    --rust: #b34a2a;
+    --gold: #c99a3c;
+    --steel: #4f7f83;
+    --line: rgba(18,33,31,0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--folder-deep);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(0,0,0,0.5);
+  }
+
+  header.report-head {
+    background: var(--folder);
+    color: var(--paper);
+    padding: 3.5rem 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 6px solid var(--gold);
+  }
+
+  header.report-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+    pointer-events: none;
+  }
+
+  .doc-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--steel);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  h1.file-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+    line-height: 1.05;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+  }
+
+  h1.file-title span { color: var(--gold); }
+
+  p.dek {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: #d8d2bd;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  nav.index {
+    background: var(--paper-dim);
+    border-bottom: 1px solid var(--line);
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+  }
+
+  nav.index a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--folder);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  nav.index a:hover, nav.index a:focus-visible { border-bottom-color: var(--gold); }
+  nav.index a.current { color: var(--rust); border-bottom-color: var(--rust); }
+
+  main { padding: 0 2.5rem 4rem; }
+
+  section.dossier { padding-top: 3rem; scroll-margin-top: 1.5rem; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--accent, var(--folder));
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .tab-index {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--accent, var(--folder));
+    border: 1px solid var(--accent, var(--folder));
+    padding: 0.15rem 0.5rem;
+    flex: none;
+  }
+
+  h2.section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--folder);
+  }
+
+  section.dossier p, section.dossier li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2a3634;
+    max-width: 68ch;
+  }
+
+  section.dossier p { margin: 0 0 1rem; }
+
+  ul.plain { margin: 0 0 1rem; padding-left: 1.2rem; }
+  ul.plain li { margin-bottom: 0.5rem; }
+
+  .credit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .credit-list li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: var(--folder);
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.7rem;
+  }
+
+  footer {
+    background: var(--folder);
+    color: #8fa5a3;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    padding: 1.4rem 2.5rem;
+    line-height: 1.6;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ---------- BACK TO TOP ---------- */
+
+  .back-to-top {
+    position: fixed;
+    bottom: 1.6rem;
+    right: 1.6rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--folder);
+    border: 2px solid var(--gold);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+    z-index: 60;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+
+  .back-to-top { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover, .back-to-top:focus-visible { background: var(--gold); color: var(--folder); }
+  .back-to-top svg { width: 20px; height: 20px; }
+
+  @media (max-width: 620px) {
+    .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 42px; height: 42px; }
+  }
+
+
+  @media (max-width: 620px) {
+    header.report-head { padding: 2.4rem 1.4rem 2rem; }
+    nav.index, main, footer { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .doc-meta { font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="report-head">
+    <div class="doc-meta">
+      <span>FILE // LEONIDA-06</span>
+      <span>DOCUMENT TYPE: LEGAL</span>
+      <span>STATUS: UNOFFICIAL SITE</span>
+    </div>
+    <h1 class="file-title">Legal &amp; <span>disclaimers.</span></h1>
+    <p class="dek">Who runs this, where the information comes from, and what it does and doesn't have to do with Rockstar Games or Take-Two.</p>
+  </header>
+
+  <nav class="index" aria-label="Site navigation">
+    <a href="home.html">Home</a>
+    <a href="gta6-new-details.html">New Details</a>
+    <a href="story.html">The Story</a>
+    <a href="characters.html">Characters</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="legal.html" class="current">Legal</a>
+    <a href="https://map.stateofleonida.net/?lang=en" target="_blank" rel="noopener noreferrer">Map ↗</a>
+  </nav>
+
+  <main>
+
+    <section class="dossier" style="--accent: var(--rust);">
+      <div class="section-head">
+        <span class="tab-index">01</span>
+        <h2 class="section-title">Not an official source</h2>
+      </div>
+      <p>This website is an independent, unofficial fan project. It is <strong>not affiliated with, endorsed by, sponsored by, or in any way officially connected to Rockstar Games, Inc., Take-Two Interactive Software, Inc., or any of their parent companies, subsidiaries, or affiliates.</strong></p>
+      <p>Nothing on this site should be treated as an official announcement, confirmation, or statement from Rockstar Games or Take-Two. Details described here — including anything labelled as a preview, leak, or rumor — are unofficial, may be inaccurate, and are subject to change or removal without notice before the game's release.</p>
+    </section>
+
+    <section class="dossier" style="--accent: var(--gold);">
+      <div class="section-head">
+        <span class="tab-index">02</span>
+        <h2 class="section-title">Trademarks &amp; copyright</h2>
+      </div>
+      <p><em>Grand Theft Auto</em>, <em>GTA</em>, <em>GTA VI</em>, and all related logos, characters, names, and imagery are trademarks and/or copyrighted material of Rockstar Games and Take-Two Interactive Software, Inc. Use of these names and any related assets on this site is for identification and commentary purposes only, and does not imply any claim of ownership.</p>
+      <p>Embedded or linked video content remains the property of its original creators and rights holders. This site does not host or rehost any trailer or video footage — trailer links point directly to the official Rockstar Games YouTube channel.</p>
+    </section>
+
+    <section class="dossier" style="--accent: var(--steel);">
+      <div class="section-head">
+        <span class="tab-index">03</span>
+        <h2 class="section-title">Where the information comes from</h2>
+      </div>
+      <p>All information presented on this site is compiled from content that is already public. Nothing here comes from private, leaked, or confidential sources obtained by this site directly. Character names, quotes, and official bios are sourced directly from <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer" style="color: var(--rust);">rockstargames.com</a>. Additional coverage, previews, and reporting referenced across these pages draw on public content published by:</p>
+      <ul class="credit-list">
+        <li>TGG</li>
+        <li>El Rubius</li>
+        <li>Davy Jones</li>
+        <li>Mike ShowSha</li>
+        <li>and other public creators &amp; outlets</li>
+      </ul>
+      <p>Quoted material is paraphrased and summarized from these public sources rather than reproduced in full. Credit belongs to the original creators for the reporting and access; this site exists only to organize and present that already-public information in one place.</p>
+      <p>The interactive map linked from this site — <a href="https://map.stateofleonida.net/?lang=en" target="_blank" rel="noopener noreferrer" style="color: var(--rust);">State of Leonida</a> — is a separate, independently run fan project. This site has no ownership over it and is not responsible for its content; it's linked purely as a resource for visitors.</p>
+    </section>
+
+    <section class="dossier" style="--accent: var(--coral);">
+      <div class="section-head">
+        <span class="tab-index">04</span>
+        <h2 class="section-title">No warranty</h2>
+      </div>
+      <p>Information on this site is provided "as is," without warranty of any kind. Game details frequently change during development, and features described here — including anything sourced from previews — may be altered, delayed, or removed entirely before launch. Verify anything important against official Rockstar Games channels.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    Unofficial fan site. Not affiliated with or endorsed by Rockstar Games or Take-Two Interactive Software, Inc. All trademarks are the property of their respective owners. Information sourced from public content by TGG, El Rubius, Davy Jones, Mike ShowSha, and other creators — see this page for full details.
+    <br>Created by <a href="https://x.com/SamzyHimself" target="_blank" rel="noopener noreferrer">SamzyHimself</a>
+  </footer>
+
+</div>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"></path>
+    <path d="M6 11l6-6 6 6"></path>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>

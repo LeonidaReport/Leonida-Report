@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story So Far — GTA 6 Field Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12211f;
+    --paper: #f2ecda;
+    --paper-dim: #e7dfc6;
+    --folder: #0f2a2c;
+    --folder-deep: #0a1e20;
+    --coral: #ff6a45;
+    --rust: #b34a2a;
+    --gold: #c99a3c;
+    --steel: #4f7f83;
+    --line: rgba(18,33,31,0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--folder-deep);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(0,0,0,0.5);
+  }
+
+  header.report-head {
+    background: var(--folder);
+    color: var(--paper);
+    padding: 3.5rem 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 6px solid var(--rust);
+  }
+
+  header.report-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+    pointer-events: none;
+  }
+
+  .doc-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--steel);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  h1.file-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    line-height: 1.05;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+  }
+
+  h1.file-title span { color: var(--rust); }
+
+  p.dek {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #d8d2bd;
+    max-width: 58ch;
+    margin: 0 0 1.6rem;
+  }
+
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    border: 2px solid var(--rust);
+    padding: 0.35rem 0.8rem;
+    transform: rotate(-2deg);
+    text-transform: uppercase;
+  }
+
+  nav.index {
+    background: var(--paper-dim);
+    border-bottom: 1px solid var(--line);
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+  }
+
+  nav.index a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--folder);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  nav.index a:hover, nav.index a:focus-visible { border-bottom-color: var(--rust); }
+  nav.index a.current { color: var(--rust); border-bottom-color: var(--rust); }
+
+  /* ---------- FOREWORD ---------- */
+
+  .foreword {
+    padding: 2.6rem 2.5rem 0;
+  }
+
+  .foreword p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #4a4534;
+    max-width: 62ch;
+    margin: 0 0 1rem;
+  }
+
+  .foreword .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ---------- TABLE OF CONTENTS ---------- */
+
+  .toc {
+    margin: 2rem 2.5rem 0;
+    padding: 1.4rem 1.6rem;
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+  }
+
+  .toc h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.8rem;
+    color: var(--folder);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding-left: 1.3rem;
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+
+  .toc li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+  }
+
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .toc a:hover, .toc a:focus-visible { border-bottom-color: var(--rust); }
+
+  /* ---------- VIEW TOGGLE ---------- */
+
+  .view-toggle {
+    margin: 2rem 2.5rem 0;
+    display: inline-flex;
+    gap: 0.4rem;
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    padding: 0.3rem;
+  }
+
+  .toggle-btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--folder);
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .toggle-btn.active {
+    background: var(--folder);
+    color: var(--paper);
+  }
+
+  .toggle-btn:hover:not(.active) { color: var(--rust); }
+
+  /* ---------- SUMMARY VIEW ---------- */
+
+  .summary-view {
+    padding: 2.2rem 2.5rem 4rem;
+    max-width: 62ch;
+  }
+
+  .summary-view p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0 0 1.15rem;
+    color: var(--ink);
+  }
+
+  .summary-view .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ---------- CHAPTERS ---------- */
+
+  main.chapters { padding: 1rem 2.5rem 4rem; }
+
+  .chapter {
+    padding-top: 3rem;
+    scroll-margin-top: 1.5rem;
+    max-width: 62ch;
+  }
+
+  .chapter-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  h2.chapter-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    margin: 0 0 1.2rem;
+    color: var(--folder);
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 0.8rem;
+  }
+
+  .chapter p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0 0 1.15rem;
+    color: var(--ink);
+  }
+
+  .chapter p:first-of-type::first-letter {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 3.2rem;
+    line-height: 0.8;
+    float: left;
+    padding: 0.1rem 0.4rem 0 0;
+    color: var(--rust);
+  }
+
+  .chapter em { color: var(--rust); font-style: italic; }
+
+  hr.break {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 3rem 0 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    background: var(--folder);
+    color: #8fa5a3;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    padding: 1.4rem 2.5rem;
+    line-height: 1.6;
+  }
+
+  footer a { color: var(--rust); text-decoration: none; }
+
+  /* ---------- BACK TO TOP ---------- */
+
+  .back-to-top {
+    position: fixed;
+    bottom: 1.6rem;
+    right: 1.6rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--folder);
+    border: 2px solid var(--rust);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+    z-index: 60;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+
+  .back-to-top { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover, .back-to-top:focus-visible { background: var(--rust); color: var(--paper); }
+  .back-to-top svg { width: 20px; height: 20px; }
+
+  @media (max-width: 620px) {
+    .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 42px; height: 42px; }
+  }
+
+
+  @media (max-width: 620px) {
+    header.report-head { padding: 2.4rem 1.4rem 2rem; }
+    nav.index, .foreword, main.chapters, footer { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .toc { margin-left: 1.4rem; margin-right: 1.4rem; }
+    .toc ol { columns: 1; }
+    .doc-meta { font-size: 0.7rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="report-head">
+    <div class="doc-meta">
+      <span>FILE // LEONIDA-06</span>
+      <span>DOCUMENT TYPE: NARRATIVE</span>
+      <span>SOURCE: PUBLIC TRAILERS ONLY</span>
+    </div>
+    <h1 class="file-title">The story <span>so far.</span></h1>
+    <p class="dek">Two trailers and one extended look, read closely and put in order — everything the footage has actually shown, laid out as one continuous story.</p>
+    <span class="stamp">Built from released footage only</span>
+  </header>
+
+  <nav class="index" aria-label="Site navigation">
+    <a href="home.html">Home</a>
+    <a href="gta6-new-details.html">New Details</a>
+    <a href="story.html" class="current">The Story</a>
+    <a href="characters.html">Characters</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="legal.html">Legal</a>
+    <a href="https://map.stateofleonida.net/?lang=en" target="_blank" rel="noopener noreferrer">Map ↗</a>
+  </nav>
+
+  <div class="foreword">
+    <span class="label">A note before reading</span>
+    <p>Nothing below comes from a leak, an inside source, or anything unreleased. Every beat here is reconstructed from the two official trailers and the extended gameplay look Rockstar has already published — matching outfits, locations, security-camera footage, and dialogue across all three pieces of footage to line events up in the order they likely happen. Treat it as a close reading, not an announcement: some of the connective tissue is inference, and the game may reveal all of this differently once it's actually in hand.</p>
+  </div>
+
+  <nav class="toc" aria-label="Chapter list" id="view-chapters-toc">
+    <h2>Chapters</h2>
+    <ol>
+      <li><a href="#ch1">I. Two People, One Plan</a></li>
+      <li><a href="#ch2">II. The Warehouse</a></li>
+      <li><a href="#ch3">III. A Favor for Boobie</a></li>
+      <li><a href="#ch4">IV. The Carousel</a></li>
+      <li><a href="#ch5">V. Professional</a></li>
+      <li><a href="#ch6">VI. Mega Mundo</a></li>
+      <li><a href="#ch7">VII. What's Still Unknown</a></li>
+    </ol>
+  </nav>
+
+  <div class="view-toggle" role="tablist" aria-label="Story view">
+    <button class="toggle-btn active" data-view="chapters" role="tab" aria-selected="true">The Full Story</button>
+    <button class="toggle-btn" data-view="summary" role="tab" aria-selected="false">Quick Summary</button>
+  </div>
+
+  <main class="chapters" id="view-chapters">
+
+    <section class="chapter" id="ch1">
+      <span class="chapter-num">Chapter One</span>
+      <h2 class="chapter-title">Two People, One Plan</h2>
+      <p>Jason never wanted much. A simple life is the whole of his ambition — the kind of thing that should be easy and somehow keeps sliding further away. Ex-military, more comfortable with a gun in his hand than a conversation, he starts out doing local jobs for a man named Brian in the Florida Keys, trading work for a place to stay. He isn't built for small talk. He's built for getting through the day.</p>
+      <p>Lucia wants something bigger, and she's done waiting for it to arrive on its own. Fresh out of prison, she's chasing the version of the good life her mother once dreamed about back in Liberty City — not the daydream, the real thing, and she's decided she's the one who has to go get it. Jason may be the way there. Whether that's good for either of them is a different question entirely, and it's one neither of them has answered yet.</p>
+    </section>
+
+    <section class="chapter" id="ch2">
+      <span class="chapter-num">Chapter Two</span>
+      <h2 class="chapter-title">The Warehouse</h2>
+      <p>Before anything else in the footage, there's this: Jason and Lucia, in disguise, getting arrested inside an abandoned warehouse. One of the arresting officers picks up a duffel bag as the scene cuts to an interrogation room — the same warehouse, matching down to the desk, the chairs, and an "opening soon" sign visible in the background. The bag ends up on the table between them. Whatever it contains, it's the reason they're both sitting there.</p>
+      <p>The man running the interrogation is the same one seen elsewhere talking to a task-force cop named Mendez, a man who tells his own people that cops have to protect each other — no matter what that protecting requires. Security footage playing in the background of the interrogation room shows Jason and Lucia already under surveillance for some time, tracked in the same outfits they're wearing in this exact scene. Before the interrogation goes anywhere, a rogue agent walks in and kills both the interrogator and another agent in the room. Jason and Lucia get out — how, exactly, isn't shown — but they leave knowing two things: whatever's in that bag was worth killing over, and Mendez's task force is dirty from the top down.</p>
+    </section>
+
+    <section class="chapter" id="ch3">
+      <span class="chapter-num">Chapter Three</span>
+      <h2 class="chapter-title">A Favor for Boobie</h2>
+      <p>Chronologically, this is where the story actually opens: Jason and Lucia picking up a package for Boobie Ike, owner of the Jack of Hearts strip club, from a low-level operator named Raymond. Raymond isn't shy about pointing out how strange it is that Boobie sent someone else to collect instead of showing up himself — a small detail that raises a bigger question about how much Boobie already knows, and how much he's staying carefully clear of.</p>
+      <p>Before that question gets answered, Raymond's partner Onesto turns on him, tipping off Mendez's task force to the location. The dirty cops arrive shooting — at armed and unarmed people alike — and Jason kills several of them in the process, the same men glimpsed breaking into this same building earlier in marketing footage. Raymond helps at least Lucia get out through a window as the building empties out into chaos. It's the first time the two of them cross paths with Mendez directly, and by the end of it, Mendez knows exactly who they are.</p>
+    </section>
+
+    <section class="chapter" id="ch4">
+      <span class="chapter-num">Chapter Four</span>
+      <h2 class="chapter-title">The Carousel</h2>
+      <p>Rattled by all of it, Jason and Lucia go to see Brian and his wife Lori for a drink — and immediately regret how much they let slip. Brian isn't just a landlord doing Jason a favor; he's a longtime smuggler who's been moving product through his boatyard since the golden age of that trade, with Lori as his actual business partner rather than a bystander in the marriage. Between the two of them, they've clearly seen versions of this story before, and neither looks especially surprised to hear Mendez's name come up.</p>
+      <p>Over dinner, Brian offers a job — but only room for one of them, and Lucia takes it without hesitation. That leaves Brian alone with Jason, and what he says next may be the clearest warning in the whole story. He tells Jason about a fairground carousel from his childhood, how he and a friend named Jimmy Kanto snuck on one night and kept cranking the speed higher — until Brian got scared and jumped off, and Jimmy Kanto, who didn't, cracked his head open and died chasing one more turn. As Brian talks, the footage cuts to Jason and Lucia hitting store after store, each one a little bigger and riskier than the last — and the camera lands squarely on Lucia the moment Jimmy Kanto's name is spoken. The message isn't subtle: someone in this partnership doesn't know when to get off the ride, and Brian is telling Jason, as plainly as he can, that it isn't going to be him.</p>
+    </section>
+
+    <section class="chapter" id="ch5">
+      <span class="chapter-num">Chapter Five</span>
+      <h2 class="chapter-title">Professional</h2>
+      <p>Looking for a way out of the hole Mendez has put them in, Jason and Lucia go to Raul Bautista — a seasoned, reckless bank robber always hunting for talent willing to take real risks for real money. Lucia's plan going in is to hold back on the details at first: work with him, earn some trust, and only then explain what kind of trouble they're actually carrying. It doesn't take long before that plan gets overtaken by events — their first real job together turns out to be the getaway car for one of Raul's own bank robberies.</p>
+      <p>What stands out from the job itself is how differently Raul treats each of them. Jason gets handled like backup muscle — useful, but not particularly special. Lucia gets something closer to mentorship; Raul recognizes the same appetite for escalation in her that Brian was just warning Jason about, and he leans into it, testing her, asking her directly afterward whether she thinks she's a professional. She says yes without blinking. Jason, watching the same exchange, stays quiet. The gap between the two of them — one looking for an exit, one looking for the next score — keeps widening with every job.</p>
+    </section>
+
+    <section class="chapter" id="ch6">
+      <span class="chapter-num">Chapter Six</span>
+      <h2 class="chapter-title">Mega Mundo</h2>
+      <p>The clearest sign that Jason and Lucia are moving up in the world is who they end up working for next: Valentina, a name already familiar from GTA Online's own criminal underworld, and someone connected to a powerful, thoroughly dishonest figure named Mr. Faber. The job itself sounds simple enough — babysit a wealthy young man named Andre Dan Leon at the opening party for Mega Mundo's new headquarters, keep him upright, and get him where he needs to be.</p>
+      <p>It doesn't stay simple. Andre skips the party in favor of a private room upstairs with a friend in a red blazer who spends the whole scene steering him away from the crowd — and specifically away from safety. When armed men move in, every Mega Mundo executive is rushed into a secured room within seconds, except Andre, whose own friend makes sure he isn't among them. The attackers demand money from him directly; Andre insists he doesn't have access to it, and a nearby computer screen backs him up, showing an account that's already been emptied out from somewhere else entirely. Jason fights through the building floor by floor to reach him, while Lucia — mid-fight elsewhere — ends up falling down an elevator shaft with one of the attackers still locked onto her. Whether Andre's "friend" set the entire thing up, and where that missing money actually went, is left hanging in the air.</p>
+    </section>
+
+    <section class="chapter" id="ch7">
+      <span class="chapter-num">Chapter Seven</span>
+      <h2 class="chapter-title">What's Still Unknown</h2>
+      <p>Every thread above stops short of an answer. What was actually inside the duffel bag that put Jason and Lucia on Mendez's radar in the first place is never shown. Whether Boobie Ike already knew what he was sending them into with Raymond is left open. Mendez reads like an early antagonist rather than a final one — a problem to survive in the opening act rather than the shape of the whole story — which leaves the Mega Mundo plot and Andre's obviously compromised friend as a second, possibly larger thread running in parallel.</p>
+      <p>And running under all of it is the throughline Brian tried to name outright: Lucia moving faster and taking bigger swings with every chapter, Raul actively encouraging exactly that instinct, and Jason left to decide how long he's willing to stay on for the ride before he has to jump off it himself — assuming, by that point, he still can.</p>
+    </section>
+
+  </main>
+
+  <div class="summary-view" id="view-summary" style="display: none;">
+    <span class="label">The whole plot, in one read</span>
+    <p>Jason wants a quiet life and keeps not getting one. Lucia wants out of poverty for good and has decided crime is how she gets there, with Jason along for the ride. Early on, the two of them stumble onto something they shouldn't — a duffel bag recovered during a disguised job — and get pulled into an interrogation by a corrupt task force led by a cop named Mendez, who protects his own no matter the cost. A rogue agent kills the men questioning them before answers come out, but the damage is done: Mendez now knows exactly who they are.</p>
+      <p>Trying to get back on their feet, Jason and Lucia pick up a package for a strip club owner named Boobie Ike from a low-level dealer, Raymond — only for Raymond's own partner to sell them out to Mendez's crew. A shootout follows, and Jason and Lucia escape, but it cements Mendez as an active threat rather than a one-time scare. Shaken, they turn to Brian, the smuggler Jason's been staying with, and his wife Lori. Brian tells Jason a story about a childhood friend who died refusing to stop a runaway carousel ride — a clear warning that Lucia's growing appetite for risk could get them both killed, and that Jason may eventually have to choose between staying in or getting out.</p>
+      <p>Looking for real backup, they approach Raul Bautista, an experienced bank robber who ends up testing them on an actual heist. Raul quickly takes a shine to Lucia's ambition, treating her almost as a protégé, while Jason stays visibly more cautious — deepening the exact divide Brian predicted. From there, the two get pulled into a much bigger job: bodyguarding a wealthy young man, Andre Dan Leon, at a party for Valentina and her circle — a world with ties to genuinely powerful, dangerous people. The party turns into an ambush. Andre's own associate appears to have set him up, steering him away from safety right as the shooting starts, and money that should have been there turns out to already be gone. Jason fights his way through to save Andre; Lucia, separated, ends up falling down an elevator shaft with an attacker still on her.</p>
+      <p>None of the big questions get answered on screen: what was actually in that first duffel bag, whether Boobie Ike knew what he was sending them into, who Andre's associate was really working for, and how far Mendez is willing to go now that he's watching them. What's clear is the shape of the story underneath all of it — Lucia pushing to go further and faster with every job, Raul encouraging exactly that, and Jason quietly running out of road to keep making excuses for staying.</p>
+  </div>
+
+  <script>
+    (function () {
+      var buttons = document.querySelectorAll('.toggle-btn');
+      var chapterViews = [document.getElementById('view-chapters-toc'), document.getElementById('view-chapters')];
+      var summaryView = document.getElementById('view-summary');
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          if (btn.dataset.view === 'summary') {
+            chapterViews.forEach(function (v) { v.style.display = 'none'; });
+            summaryView.style.display = 'block';
+          } else {
+            chapterViews.forEach(function (v) { v.style.display = ''; });
+            summaryView.style.display = 'none';
+          }
+        });
+      });
+    })();
+  </script>
+
+  <footer>
+    Unofficial fan site. Not affiliated with or endorsed by Rockstar Games or Take-Two Interactive Software, Inc. This page is a reader's synthesis of publicly released trailer and preview footage, not an official synopsis. Info sourced from public content by TGG, El Rubius, Davy Jones, Mike ShowSha &amp; others — see <a href="legal.html">Legal</a>.
+    <br>Created by <a href="https://x.com/SamzyHimself" target="_blank" rel="noopener noreferrer">SamzyHimself</a>
+  </footer>
+
+</div>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"></path>
+    <path d="M6 11l6-6 6 6"></path>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
